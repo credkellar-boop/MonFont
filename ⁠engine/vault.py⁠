@@ -1,0 +1,18 @@
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+import os
+
+class SovereignVault:
+    def __init__(self, master_key: bytes):
+        self.aesgcm = AESGCM(master_key)
+
+    def seal_black_folder(self, data: str) -> bytes:
+        """Encrypts the repository state into the sovereign Black Folder."""
+        nonce = os.urandom(12)
+        encrypted_data = self.aesgcm.encrypt(nonce, data.encode(), None)
+        return nonce + encrypted_data
+
+    def unseal_black_folder(self, sealed_data: bytes) -> str:
+        """Decrypts the state for the Alpha-One Morning Brief."""
+        nonce = sealed_data[:12]
+        data = sealed_data[12:]
+        return self.aesgcm.decrypt(nonce, data, None).decode()
