@@ -1,0 +1,19 @@
+import time
+from threading import Thread
+
+class MonadBatcher:
+    def __init__(self, registry_contract):
+        self.buffer = []
+        self.contract = registry_contract
+
+    def add_to_batch(self, font_name, ipfs_hash):
+        self.buffer.append((font_name, ipfs_hash))
+        if len(self.buffer) >= 100:
+            self.flush()
+
+    def flush(self):
+        names = [f[0] for f in self.buffer]
+        hashes = [f[1] for f in self.buffer]
+        # Call registerBatch on-chain
+        self.contract.functions.registerBatch(names, hashes).transact()
+        self.buffer = []
