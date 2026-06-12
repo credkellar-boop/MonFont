@@ -1,0 +1,33 @@
+# --- System & Version Control ---
+.git
+.gitignore
+.github/
+
+# --- Local Environment & Secrets ---
+.env
+.env.local
+.env.*.local
+
+# --- Python & Dependency Management ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# --- MonFonts Output & Cache ---
+# Exclude pre-compiled fonts and temporary preview images 
+# to keep the image size minimal.
+output/
+cache/
+
+# --- IDEs & OS Files ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
