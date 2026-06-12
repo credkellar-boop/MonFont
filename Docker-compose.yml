@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: monfonts_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      - ./output:/app/output
+    env_file:
+      - .env
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+
+  ui:
+    build: .
+    container_name: monfonts_ui
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+      - ./output:/app/output
+    env_file:
+      - .env
+    command: streamlit run app.py
+    depends_on:
+      - api
+    restart: unless-stopped
