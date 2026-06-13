@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="IMG_3333.jpeg" alt="Profile Image" width="400"/>
+</p>
 # MonFonts // Parametric AI Font Synthesis
 
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
